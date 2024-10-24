@@ -18,7 +18,7 @@ Run the Playbooks : Execute the playbook using the ansible-playbook command, pro
 
 # Ansible Firmware Update Tool
 
-This repository contains ansible modules, playbooks to perform firmware upgrade HPE Cray XD225v, HPE Cray XD295v, HPE Cray XD220v, HPE Cray XD670 and HPE Cray XD665
+This repository contains ansible modules, playbooks to perform firmware upgrade HPE Cray XD225v, HPE Cray XD295v, HPE Cray XD220v
 
 
 
@@ -96,23 +96,20 @@ inputs:
 
 2. get_system_firmware_inventory.yml : Playbook to fetch the system firmware inventory information
 
+3. pdb_bmc_update.yml – This Ansible playbook file, updates the PDBPIC and BMC according to the dependencies. It updates first PDBPIC on master node and followed by BMC on Non-master node later BMC on the master node.
+
 
 # Targets supported for Updates:
 
 For HPE Cray XD220v, HPE Cray XD225V and HPE Cray XD295 supported targets are:
 
-- BMC
-  
-- BMC_Master
+- PDBPIC_BMC
 
 - BIOS
 
 - MainCPLD
 
 - HDDBPPIC
-
-- PDBPIC 
-
 
 # Firmware Upgrade
 
@@ -135,8 +132,6 @@ The playbook `system_firmware_update.yml` is used to perform the firmware upgrad
 3. Run the ansible playbook:
 
    ```ansible-playbook -i inventory system_firmware_update.yml -e @system_credentials.yml -e @cray-vault --ask-vault-pass```
-
-   After the firmware target is upgraded, the server reboots for all required components.
 
 
 
